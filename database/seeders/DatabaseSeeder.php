@@ -2,9 +2,12 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Post;
+use App\Models\User;
+use App\Models\Category;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,11 +16,25 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
         User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+            'name' => 'test',
+            'email' => 'test@email.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make("1234567890"),
         ]);
+
+        $categories = [
+            'Technology',
+            'Health',
+            'Lifestyle',
+            'Education',
+            'Travel',
+        ];
+
+        foreach ($categories as $category) {
+            Category::firstOrCreate(['name' => $category]);
+        }
+
+        Post::factory(20)->create();
     }
 }
