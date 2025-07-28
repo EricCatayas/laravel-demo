@@ -35,6 +35,6 @@ class DatabaseSeeder extends Seeder
             Category::firstOrCreate(['name' => $category]);
         }
 
-        Post::factory(20)->create();
+        // Post::factory(20)->create(); 
     }
 }
