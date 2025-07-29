@@ -7,6 +7,7 @@ use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\PostCreateRequest;
 
 class PostController extends Controller
 {
@@ -43,15 +44,9 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(PostCreateRequest $request)
     {
-        $data = $request->validate([
-            'image' => ['required', 'image'],
-            'title' => 'required',
-            'content' => 'required',
-            'category_id' => ['required', 'exists:categories,id'],
-            'published_at' => ['nullable', 'date']
-        ]);
+        $data = $request->validated();
 
         $image = $data['image'];
         unset($data['image']);

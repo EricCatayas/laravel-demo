@@ -18,6 +18,12 @@
         @method('patch')
 
         <div>
+            <x-input-label for="image" value="avatar" />                    
+            <input id="image" name="image" :value="old('image')" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file">
+            <x-input-error :messages="$errors->get('image')" class="mt-2" />
+        </div>
+
+        <div>
             <x-input-label for="name" :value="__('Name')" />
             <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
@@ -45,6 +51,14 @@
                     @endif
                 </div>
             @endif
+        </div>
+
+        <div>
+            <x-input-label for="bio" :value="__('Bio')" />
+            <x-input-textarea id="bio" class="block mt-1 w-full" name="bio" required autofocus>
+                {{ old('bio')}}
+            </x-input-textarea>
+            <x-input-error :messages="$errors->get('bio')" class="mt-2" />
         </div>
 
         <div class="flex items-center gap-4">
